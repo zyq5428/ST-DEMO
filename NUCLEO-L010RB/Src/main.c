@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stdio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -120,6 +121,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 //  uart_statu = HAL_UART_Receive_IT(&huart2, uart_data, 1);
+
+  printf("This is a test\n\r");
 
   HAL_UART_Receive_DMA(&huart2, uart_rx_buf, 15);
   /* USER CODE END 2 */
