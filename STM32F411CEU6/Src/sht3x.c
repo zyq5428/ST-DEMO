@@ -843,14 +843,14 @@ void sht31_test(void)
 
     	HAL_Delay(2000);
 
-    	HAL_GPIO_TogglePin(GPIOB, Green_Pin);
+//    	HAL_GPIO_TogglePin(GPIOB, Green_Pin);
 
         i--;
     }
 
     OLED_Display_Off();
 
-    HAL_Delay(10000);
+    HAL_Delay(5000);
 
     OLED_Display_On();
 
