@@ -5,7 +5,8 @@
 //-- Defines ------------------------------------------------------------------
 //Processor endian system
 //#define BIG ENDIAN   //e.g. Motorola (not tested at this time)
-#define LITTLE_ENDIAN  //e.g. PIC, 8051, NEC V850
+//#ifndef LITTLE_ENDIAN
+//#define LITTLE_ENDIAN  //e.g. PIC, 8051, NEC V850
 //=============================================================================
 // basic types: making the size of types clear
 //=============================================================================

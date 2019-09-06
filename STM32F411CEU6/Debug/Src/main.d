@@ -27,7 +27,7 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Src/sht3x.h \
- ../Src/typedefs.h ../Src/system.h
+ ../Src/sht3x_error.h ../Src/typedefs.h ../Src/oled_display.h
 
 ../Inc/main.h:
 
@@ -89,6 +89,8 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
 
 ../Src/sht3x.h:
 
+../Src/sht3x_error.h:
+
 ../Src/typedefs.h:
 
-../Src/system.h:
+../Src/oled_display.h:

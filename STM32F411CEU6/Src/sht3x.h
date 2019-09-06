@@ -4,8 +4,10 @@
 
 //-- Includes -----------------------------------------------------------------
 #include "main.h"
+#include "stdio.h"
+
+#include "sht3x_error.h"
 #include "typedefs.h"
-#include "system.h"
 
 //typedef unsigned char u8t;
 //typedef unsigned short int u16t;

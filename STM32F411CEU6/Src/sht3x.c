@@ -1,12 +1,13 @@
 
 //-- Includes -----------------------------------------------------------------
 #include "sht3x.h"
-#include "stdio.h"
+#include "oled.h"
+#include "display_multifunction.h"
 
 
 u8t cmd[2];
 u8t raw_value[6];
-extern I2C_HandleTypeDef hi2c2;
+extern I2C_HandleTypeDef hi2c1;
 
 
 //-- Defines ------------------------------------------------------------------
@@ -774,12 +775,10 @@ static ft SHT3X_CalcHumidity(u16t rawValue)
 
 static u8t SHT3X_Send_Command(u16t command)
 {
-	HAL_StatusTypeDef i2c_statu;
-
-    cmd[0] = (u8t)(command >> 8);
+	cmd[0] = (u8t)(command >> 8);
     cmd[1] = (u8t)(command & 0xFF);
 
-    i2c_statu =  HAL_I2C_Master_Transmit(&hi2c2, SHT31_ADDR, cmd, 2, 200);
+    HAL_I2C_Master_Transmit(&hi2c1, SHT31_ADDR, cmd, 2, 200);
 
     return 0;
 }
@@ -798,10 +797,8 @@ void data_synthesis(u8t data[])
 SHT3x_Sensor_Param sht3x_param;
 #define sht3x   1
 
-void sht31_test(void)
+void sht31_measurement(void)
 {
-    HAL_StatusTypeDef i2c_statu;
-
     // wait 50ms after power on
     HAL_Delay(50);
 
@@ -810,7 +807,7 @@ void sht31_test(void)
     HAL_Delay(50);
 
 
-    i2c_statu =  HAL_I2C_Master_Receive(&hi2c2, SHT31_ADDR, raw_value, 6, 200);
+    HAL_I2C_Master_Receive(&hi2c1, SHT31_ADDR, raw_value, 6, 200);
 
     if (CHECKSUM_ERROR == SHT3X_CheckCrc(raw_value, 2, raw_value[2])) {
         //Red led on
@@ -832,8 +829,27 @@ void sht31_test(void)
     sht3x_param.Temperature = Temperature;
     sht3x_param.Humidity = Humidity;
 
-    printf("SHT31 test complete\n\r");
+    display(&sht3x_param, &sht3x_param, sht3x);
 
-    HAL_Delay(1000);
+}
+
+void sht31_test(void)
+{
+    int i = 3;
+
+    while (i > 0)
+    {
+    	sht31_measurement();
+
+    	HAL_Delay(2000);
+
+        i--;
+    }
+
+    OLED_Display_Off();
+
+    HAL_Delay(15000);
+
+    OLED_Display_On();
 
 }
