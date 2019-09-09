@@ -24,6 +24,7 @@ extern I2C_HandleTypeDef hi2c2;
 /*
  * STM32F4的I2C库有问题，I2C地址不会自动添加读写位
  */
+//#define oled_addr 0x3C
 #define oled_addr 0x78
 
 unsigned char oled_cmd[2] = {0x00, 0x00};
