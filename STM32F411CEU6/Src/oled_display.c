@@ -8,6 +8,7 @@
 void oled_display_memu(void)
 {
 	unsigned char Humidity_Unit[5] = "%RH";
+	unsigned char Light_Unit[5] = "Lx";
     OLED_Init();
     HAL_Delay(10);
 
@@ -16,17 +17,24 @@ void oled_display_memu(void)
     OLED_ShowCHinese(72,0,2);//度
     OLED_ShowCHinese(100,0,3);//计
 
-    OLED_ShowCHinese(2,3,0);//温
-    OLED_ShowCHinese(22,3,2);//度
-//        OLED_ShowString(56,3,":");
-//    OLED_ShowString(48,3,"26.50");
-    OLED_ShowCHinese(100,3,4);//℃
+    OLED_ShowCHinese(2,2,0);//温
+    OLED_ShowCHinese(22,2,2);//度
+//	OLED_ShowString(56,2,":");
+//	OLED_ShowString(48,2,"26.50");
+    OLED_ShowCHinese(100,2,4);//℃
 
-    OLED_ShowCHinese(2,5,1);//湿
-    OLED_ShowCHinese(22,5,2);//度
-//        OLED_ShowString(56,5,":");
-//    OLED_ShowString(48,5,"78.23");
-    OLED_ShowString(98,5,Humidity_Unit);
+    OLED_ShowCHinese(2,4,1);//湿
+    OLED_ShowCHinese(22,4,2);//度
+//	OLED_ShowString(56,4,":");
+//	OLED_ShowString(48,4,"78.23");
+    OLED_ShowString(98,4,Humidity_Unit);
+
+    OLED_ShowCHinese(2,6,5);//湿
+    OLED_ShowCHinese(22,6,6);//度
+//	OLED_ShowString(56,5,":");
+//	OLED_ShowString(48,5,"78.23");
+    OLED_ShowString(98,6,Light_Unit);
+
 //    delay_s(1);
 //
 //    OLED_ShowString(0,2,"0.96' OLED TEST");

@@ -2,7 +2,7 @@
 //-- Includes -----------------------------------------------------------------
 #include "sht3x.h"
 #include "oled.h"
-#include "display_multifunction.h"
+#include "uart_display.h"
 
 
 u8t cmd[2];
@@ -794,11 +794,59 @@ void data_synthesis(u8t data[])
     RawHumidity = ((data[3] << 8) | data[4]);
 }
 
+const unsigned char tem_title[] = "\t\nTemperature is :\t\n";
+const unsigned char hum_title[] = "\t\nhumidity is :\t\n";
+
+const unsigned char tem_suffix[] = " C";
+const unsigned char hum_suffix[] = " %RH";
+
+unsigned char sht31_display(SHT3x_Sensor_Param *ptr)
+{
+    float Tem = ptr->Temperature;
+    float hum = ptr->Humidity;
+
+    int tmp;
+    unsigned char tem_unit[5], hum_unit[5];
+
+    tmp = (int)(Tem * 100);
+
+    tem_unit[4] = tmp / 1 % 10 + '0';
+    tem_unit[3] = tmp / 10 % 10 + '0';
+    tem_unit[2] = '.';
+    tem_unit[1] = tmp / 100 % 10 + '0';
+    tem_unit[0] = tmp / 1000 % 10 + '0';
+
+    tmp = (int)(hum * 100);
+
+    hum_unit[4] = tmp / 1 % 10 + '0';
+    hum_unit[3] = tmp / 10 % 10 + '0';
+    hum_unit[2] = '.';
+    hum_unit[1] = tmp / 100 % 10 + '0';
+    hum_unit[0] = tmp / 1000 % 10 + '0';
+
+
+    uart_multibyte_send((unsigned char *)tem_title, sizeof(tem_title));
+    uart_multibyte_send((unsigned char *)tem_unit, sizeof(tem_unit));
+    uart_multibyte_send((unsigned char *)tem_suffix, sizeof(tem_suffix));
+
+    OLED_ShowString_N(50,2, tem_unit, sizeof(tem_unit));
+
+    uart_multibyte_send((unsigned char *)hum_title, sizeof(hum_title));
+    uart_multibyte_send((unsigned char *)hum_unit, sizeof(hum_unit));
+    uart_multibyte_send((unsigned char *)hum_suffix, sizeof(hum_suffix));
+
+    OLED_ShowString_N(50,4, hum_unit, sizeof(hum_unit));
+
+    return 0;
+}
+
 SHT3x_Sensor_Param sht3x_param;
 #define sht3x   1
 
-void sht31_measurement(void)
+void sht31_measurement(SHT3x_Sensor_Param *param)
 {
+	SHT3x_Sensor_Param *sht3x_param = param;
+
     // wait 50ms after power on
     HAL_Delay(50);
 
@@ -824,12 +872,10 @@ void sht31_measurement(void)
     Temperature = SHT3X_CalcTemperature(RawTemperature);
     Humidity = SHT3X_CalcHumidity(RawHumidity);
 
-    sht3x_param.RawTemperature = RawTemperature;
-    sht3x_param.RawHumidity = RawHumidity;
-    sht3x_param.Temperature = Temperature;
-    sht3x_param.Humidity = Humidity;
-
-    display(&sht3x_param, &sht3x_param, sht3x);
+    sht3x_param->RawTemperature = RawTemperature;
+    sht3x_param->RawHumidity = RawHumidity;
+    sht3x_param->Temperature = Temperature;
+    sht3x_param->Humidity = Humidity;
 
 }
 
@@ -839,7 +885,7 @@ void sht31_test(void)
 
     while (i > 0)
     {
-    	sht31_measurement();
+//    	sht31_measurement();
 
     	HAL_Delay(2000);
 
@@ -854,4 +900,12 @@ void sht31_test(void)
 
     OLED_Display_On();
 
+}
+int sht31_read(SHT3x_Sensor_Param *ptr)
+{
+	int statu = 0;
+
+	sht31_measurement(ptr);
+
+	return statu;
 }

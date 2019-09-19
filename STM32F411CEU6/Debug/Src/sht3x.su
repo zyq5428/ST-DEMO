@@ -6,5 +6,7 @@ sht3x.c:745:11:SHT3X_CalcTemperature	16	static
 sht3x.c:753:11:SHT3X_CalcHumidity	16	static
 sht3x.c:776:12:SHT3X_Send_Command	24	static
 sht3x.c:791:6:data_synthesis	16	static
-sht3x.c:800:6:sht31_measurement	16	static
-sht3x.c:836:6:sht31_test	16	static
+sht3x.c:803:15:sht31_display	48	static
+sht3x.c:846:6:sht31_measurement	32	static
+sht3x.c:882:6:sht31_test	16	static
+sht3x.c:904:5:sht31_read	24	static

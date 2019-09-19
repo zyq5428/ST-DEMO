@@ -1,4 +1,5 @@
-gy_30.c:11:6:gy_30_send_command	24	static
-gy_30.c:16:10:gy_30_read_data	16	static
-gy_30.c:22:6:gy_30_display	32	static
-gy_30.c:45:6:gy_30_test	16	static
+gy_30.c:12:6:gy_30_send_command	24	static
+gy_30.c:17:10:gy_30_read_data	16	static
+gy_30.c:23:15:gy_30_display	32	static
+gy_30.c:54:10:gy_30_test	16	static
+gy_30.c:66:5:gy_30_read	24	static

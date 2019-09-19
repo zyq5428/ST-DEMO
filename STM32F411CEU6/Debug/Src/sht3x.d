@@ -26,9 +26,11 @@ Src/sht3x.o: ../Src/sht3x.c ../Src/sht3x.h ../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  ../Src/sht3x_error.h ../Src/typedefs.h ../Src/oled.h \
- ../Src/display_multifunction.h
+ ../Src/uart_display.h
 
 ../Src/sht3x.h:
 
@@ -88,6 +90,10 @@ Src/sht3x.o: ../Src/sht3x.c ../Src/sht3x.h ../Inc/main.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
+
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
+
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Src/sht3x_error.h:
@@ -96,4 +102,4 @@ Src/sht3x.o: ../Src/sht3x.c ../Src/sht3x.h ../Inc/main.h \
 
 ../Src/oled.h:
 
-../Src/display_multifunction.h:
+../Src/uart_display.h:

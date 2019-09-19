@@ -334,7 +334,11 @@ etError SHT3X_SoftReset(void);
 //-----------------------------------------------------------------------------
 void SHT3X_HardReset(void);
 
+unsigned char sht31_display(SHT3x_Sensor_Param *ptr);
+
 void sht31_test(void);
+
+int sht31_read(SHT3x_Sensor_Param *ptr);
 
 
 #endif
